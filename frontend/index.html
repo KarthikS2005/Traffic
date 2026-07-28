@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bengaluru Route Clearance — Live Ops</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">◆</span>
+      <div class="brand-text">
+        <h1>ROUTE<span>CLEAR</span></h1>
+        <p>Bengaluru Corridor Clearance Ops</p>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <div class="live-pill" id="live-pill">
+        <span class="dot"></span>
+        <span id="live-label">LIVE</span>
+      </div>
+      <div class="clock" id="clock">--:--:--</div>
+    </div>
+  </header>
+
+  <main class="layout">
+
+    <!-- MAP -->
+    <section class="panel map-panel">
+      <div class="panel-head">
+        <h2>Corridor Map</h2>
+        <div class="legend">
+          <span class="legend-item"><i class="sw blue"></i>Very low</span>
+          <span class="legend-item"><i class="sw green"></i>Smooth</span>
+          <span class="legend-item"><i class="sw yellow"></i>Moderate</span>
+          <span class="legend-item"><i class="sw red"></i>Heavy</span>
+        </div>
+      </div>
+      <div id="map"></div>
+      <div class="map-footer">
+        <span id="corridor-count">-- corridors tracked</span>
+        <span id="last-updated">updated --</span>
+      </div>
+    </section>
+
+    <!-- SIDE PANEL -->
+    <aside class="panel side-panel">
+
+      <div class="block">
+        <h2>Plan a Commute</h2>
+        <label class="field">
+          <span>Origin</span>
+          <select id="origin-select"></select>
+        </label>
+        <label class="field">
+          <span>Destination</span>
+          <select id="destination-select"></select>
+        </label>
+        <button id="predict-btn" class="btn-primary">Predict Clearance</button>
+        <p class="hint">Predictions run through the trained route models and are logged to the live activity feed. Values include a small simulated live variation since the dataset is a static historical snapshot.</p>
+      </div>
+
+      <div class="block" id="result-block" hidden>
+        <h2>Recommendation</h2>
+        <div class="rec-banner" id="rec-banner"></div>
+        <div class="route-compare" id="route-compare"></div>
+        <p class="alert-text" id="alert-text"></p>
+      </div>
+
+      <div class="block grow">
+        <h2>Recent Activity</h2>
+        <div class="activity-table-wrap">
+          <table class="activity-table">
+            <thead>
+              <tr><th>Corridor</th><th>Recommended</th><th>Saved</th><th>Time</th></tr>
+            </thead>
+            <tbody id="activity-body">
+              <tr><td colspan="4" class="empty-row">No predictions yet</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </aside>
+
+  </main>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
